@@ -2,6 +2,7 @@ package com.magalhaesriquelme.workoshopmongo.service;
 
 
 import com.magalhaesriquelme.workoshopmongo.domain.User;
+import com.magalhaesriquelme.workoshopmongo.dto.UserDTO;
 import com.magalhaesriquelme.workoshopmongo.repository.UserRepository;
 import com.magalhaesriquelme.workoshopmongo.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objdto) {
+        return new User(objdto.getId(), objdto.getName(), objdto.getEmail());
     }
 }
